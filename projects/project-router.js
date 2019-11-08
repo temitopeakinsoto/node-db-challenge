@@ -14,5 +14,20 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/:id', (req, res) => {
+    const { id } = req.params;  
+    Projects.getProjectById(id)
+    .then(project => {
+      if (project) {
+        res.status(200).json(project);
+      } else {
+        res.status(404).json({ message: 'Could not find any project with specified project id.' })
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: `Something went wrong while trying to get this project: ${err.message}` });
+    });
+  });
+
 
 module.exports = router;
