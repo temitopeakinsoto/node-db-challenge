@@ -6,31 +6,31 @@ exports.seed = function(knex) {
         { 
           task_description: "Mark the proposed building sites", 
           task_notes: "speak to the head teacher", 
-          task_status: "true" ,
+          task_status: 1,
           project_id: 1
         },
         { 
           task_description: "purchase cements and fabricated bricks", 
           task_notes: "pay merchants", 
-          task_status: "false" ,
+          task_status: 0,
           project_id: 1
         },
         { 
           task_description: "get engineers on site", 
           task_notes: "prepare their daily pay", 
-          task_status: "false" ,
+          task_status: 0,
           project_id: 1
         },
         { 
           task_description: "start building", 
           task_notes: "prepare a duration of construction", 
-          task_status: "false" ,
+          task_status: 0,
           project_id: 1
         },
         { 
           task_description: "clone repo from git hub", 
           task_notes: "navigate to desired folder and clone repo", 
-          task_status: "true" ,
+          task_status: 0,
           project_id: 2
         },
         { 
