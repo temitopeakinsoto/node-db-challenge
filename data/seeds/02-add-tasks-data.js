@@ -1,58 +1,56 @@
-
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('tasks').truncate()
-    .then(function () {
-      // Inserts seed entries
-      return knex('tasks').insert([
-        {
-          task_description: "Sign A contract with Julius Berger", 
-          task_notes: "This is a project for the construction of the Lagos-Abeokuta Express road", 
-          task_status: 1,
+  return knex("tasks")
+    .truncate()
+    .then(function() {
+      return knex("tasks").insert([
+        { 
+          task_description: "Mark the proposed building sites", 
+          task_notes: "speak to the head teacher", 
+          task_status: "true" ,
           project_id: 1
         },
-        {
-          task_description: "Get Tractors and materials", 
-          task_notes: "This is a project for the construction of the Lagos-Abeokuta Express road", 
-          task_status: 0,
+        { 
+          task_description: "purchase cements and fabricated bricks", 
+          task_notes: "pay merchants", 
+          task_status: "false" ,
           project_id: 1
         },
-        {
-          task_description: "Organize youths to work on project", 
-          task_notes: "This is a project for the construction of the Lagos-Abeokuta Express road", 
-          task_status: 1,
+        { 
+          task_description: "get engineers on site", 
+          task_notes: "prepare their daily pay", 
+          task_status: "false" ,
           project_id: 1
         },
-        {
-          task_description: "Start actual building of roads", 
-          task_notes: "This is a project for the construction of the Lagos-Abeokuta Express road", 
-          task_status: 0,
+        { 
+          task_description: "start building", 
+          task_notes: "prepare a duration of construction", 
+          task_status: "false" ,
           project_id: 1
         },
-        {
-          task_description: "complete the road and commission it", 
-          task_notes: "This is a project for the construction of the Lagos-Abeokuta Express road", 
-          task_status: 0,
-          project_id: 1
-        },
-        {
-          task_description: "Sign a contract with Indian equipments manufacturers", 
-          task_notes: "Sign a contract with Indian equipments manufacturers the equipments project for the purchase of state-of-the-art hospital equipments.", 
-          task_status: 1,
+        { 
+          task_description: "clone repo from git hub", 
+          task_notes: "navigate to desired folder and clone repo", 
+          task_status: "true" ,
           project_id: 2
         },
-        {
-          task_description: "Import Equipements from India", 
-          task_notes: "Import Equipements from India the equipments project for the purchase of state-of-the-art hospital equipments.", 
-          task_status: 0,
+        { 
+          task_description: "Fire project using VScode", 
+          task_notes: "download and install visual Studio Code", 
+          task_status: "true" ,
           project_id: 2
         },
-        {
-          task_description: "Set up and commission the equipments", 
-          task_notes: "Set up and commission the equipments project for the purchase of state-of-the-art hospital equipments.", 
-          task_status: 0,
+        { 
+          task_description: "install dependencies", 
+          task_notes: "install dependencies using npm or yarn", 
+          task_status: "false" ,
           project_id: 2
-        }
+        },
+        { 
+          task_description: "attempt", 
+          task_notes: "attempt the sprint using all you learned during the week", 
+          task_status: "false" ,
+          project_id: 2
+        },
       ]);
     });
 };

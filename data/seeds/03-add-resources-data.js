@@ -1,34 +1,28 @@
-
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {
-          resource_name: "money", 
-          resource_description: 'Money needed for the kick-off of project'
+  return knex("resources")
+    .truncate()
+    .then(function() {
+      return knex("resources").insert([
+        { 
+          resource_name: "cement", 
+          resource_description: "12 bags", 
         },
-        {
-          resource_name: "500 young able-bodied men", 
-          resource_description: '500 young able-bodied men needed for the completion of project'
+        { 
+          resource_name: "dependencies", 
+          resource_description: "npm install dependencies", 
         },
-        {
-          resource_name: "water", 
-          resource_description: 'water needed for the completion of project'
+        { 
+          resource_name: "employ engineers", 
+          resource_description: "check out their projects and choose your team", 
         },
-        {
-          resource_name: "Microscopes", 
-          resource_description: 'Microscopes needed for medical purposes'
+        { 
+          resource_name: "git hub", 
+          resource_description: "to get access to sprint", 
         },
-        {
-          resource_name: "Scissors", 
-          resource_description: 'Scissors needed for the commissioning of project'
+        { 
+          resource_name: "laptop", 
+          resource_description: "a functional laptop is required", 
         },
-        {
-          resource_name: "Sounds System", 
-          resource_description: 'Sounds System needed for the kick-off of and sign-off of project'
-        }        
         
       ]);
     });
