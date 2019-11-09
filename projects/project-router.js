@@ -7,7 +7,10 @@ const router = express.Router();
 router.get('/', (req, res) => {
     Projects.getProjects()
   .then(projects => {
-    res.status(200).json(projects);
+    const displayProjects = projects.map(project => {
+      return { ...project, project_status: project.project_status === 1 ? true : false };
+    });
+    res.status(200).json(displayProjects);
   })
   .catch(err => {
     res.status(500).json({ message: 'Failed to get projects list from the database' });
@@ -29,5 +32,18 @@ router.get('/:id', (req, res) => {
     });
   });
 
+  router.post("/", (req, res) => {
+    const projectBody = req.body;
+    Projects
+      .addProjects(projectBody)
+      .then(project => {
+        res.status(201).json(project);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: "Could not create project this in the database" + err.message });
+      });
+  });
 
 module.exports = router;
