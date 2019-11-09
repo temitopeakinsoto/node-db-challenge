@@ -21,7 +21,7 @@ function addProjects(project) {
 }
 
 function getProjectById(projectId){
-  return db("projects as p")
+  return db("projects as p").first()
   .select("p.id", "p.project_name", "p.project_description", "p.project_status")
   .where({ "p.id": projectId });
 }

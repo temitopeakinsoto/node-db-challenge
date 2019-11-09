@@ -4,6 +4,24 @@ const Projects = require('./project-model.js');
 
 const router = express.Router();
 
+function validateProjectId(req, res, next){
+  const id = req.params.id;
+  Projects.getProjectById(id)
+  .then(project => {
+    if(project){
+      req.project = project;
+      next();
+    }else{
+      res
+        .status(400)
+          .json({message: "There is no project with the specified ID"})
+    }
+  })
+  .catch(err => {
+    res.status(500).json({message: `There was an error with retrieving the project ${err.message}`})
+  })
+}
+
 router.get('/', (req, res) => {
     Projects.getProjects()
   .then(projects => {
@@ -17,7 +35,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', validateProjectId, (req, res) => {
     const { id } = req.params;  
     Projects.getProjectById(id)
     .then(project => {
