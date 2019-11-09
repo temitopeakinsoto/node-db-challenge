@@ -8,6 +8,7 @@ module.exports = {
     addTask,
     getTasksById,
     getResource,
+    getResourceById,
     addResource
   };
 
