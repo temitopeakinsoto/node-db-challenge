@@ -18,22 +18,19 @@ function validateProjectId(req, res, next) {
       }
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({
-          message: `There was an error with retrieving the project ${err.message}`
-        });
+      res.status(500).json({
+        message: `There was an error with retrieving the project ${err.message}`
+      });
     });
 }
 
-function validateProjectPost(req, res, next){
+function validateProjectPost(req, res, next) {
   const projectPost = req.body;
-  if(!projectPost){
-    res.status(400).json({message: `Project must have required post fields`})
-  }
-  else if(!projectPost.project_name){
-    res.status(400).json({message: `Project must have a project_name field`})
-  }else {
+  if (!projectPost) {
+    res.status(400).json({ message: `Project must have required post fields` });
+  } else if (!projectPost.project_name) {
+    res.status(400).json({ message: `Project must have a project_name field` });
+  } else {
     req.project = projectPost;
     next();
   }
@@ -58,41 +55,26 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", validateProjectId, (req, res) => {
-  const { id } = req.params;
-  Projects.getProjectById(id)
-    .then(project => {
-      if (project) {
-        res.status(200).json(project);
-      } else {
-        res
-          .status(404)
-          .json({
-            message: "Could not find any project with specified project id."
-          });
-      }
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({
-          message: `Something went wrong while trying to get this project: ${err.message}`
-        });
+  try {
+    res.status(200).json(req.project);
+  } catch (err) {
+    res.status(500).json({
+      message: `Something went wrong while trying to get this project: ${err.message}`
     });
+  }
 });
 
 router.post("/", validateProjectPost, (req, res) => {
   const { project_name, project_description } = req.project;
-  const projectBody = { project_name, project_description}
+  const projectBody = { project_name, project_description };
   Projects.addProjects(projectBody)
     .then(project => {
       res.status(201).json(project);
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({
-          error: "Could not create project this in the database" + err.message
-        });
+      res.status(500).json({
+        error: "Could not create project this in the database" + err.message
+      });
     });
 });
 
