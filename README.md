@@ -40,12 +40,21 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] Explain the difference between `Relational Databases` and `SQL`.
 
+ANS: 
+Relational Databasea database structured to recognize relations between stored items of information. read (view data via queries), create (add data, tables, rows, or columns), update (change data, tables, rows, or columns), and delete data
+while SQL is the language used to interact/query the Relational Database system.
+
 - [ ] Why do tables need a `primary key`?
+ANS: 
+The main purpose of a primary key is to uniquely identify each record in a database table and also to implement a relationship between two tables in a relational database, it is the "target" or an "anchor" which a foreign key can reference.
 
 - [ ] What is the name given to a table column that references the primary key on another table.
+ANS:
+Foreign key
 
 - [ ] What do we need in order to have a _many to many_ relationship between two tables.
-
+ANS: 
+we need a joining table.
 ## Minimum Viable Product
 
 Take the steps necessary to complete the project from scratch. Start by initializing your project with a `package.json` and go from there.
