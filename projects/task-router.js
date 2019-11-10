@@ -20,12 +20,30 @@ function validateTaskById(req, res, next) {
       }
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({
-          message: `There was an error retrieving the task: ${err.message}`
-        });
+      res.status(500).json({
+        message: `There was an error retrieving the task: ${err.message}`
+      });
     });
+}
+
+function validateTaskPost(req, res, next) {
+  const taskPost = req.body;
+  if (!taskPost) {
+    res.status(400).json({ message: `Task must have required fields` });
+  } else if (!taskPost.task_description) {
+    res
+      .status(400)
+      .json({ message: `Task must have a task_description field` });
+  } else if (!taskPost.task_status) {
+    res.status(400).json({ message: `Task must have a task_status field` });
+  } else if (!taskPost.project_id) {
+    res
+      .status(400)
+      .json({ message: "Task must have an associated project Id" });
+  } else {
+    req.task = taskPost;
+    next();
+  }
 }
 
 router.get("/", (req, res) => {
@@ -54,8 +72,8 @@ router.get("/:id", validateTaskById, (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
-  const taskBody = req.body;
+router.post("/", validateTaskPost, (req, res) => {
+  const taskBody = req.task;
   tasks
     .addTask(taskBody)
     .then(task => {

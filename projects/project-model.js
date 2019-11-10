@@ -36,7 +36,8 @@ function getTasks() {
       "p.project_description",
       "t.task_description",
       "t.task_notes",
-      "t.task_status"
+      "t.task_status",
+      "t.project_id"
     );
 }
 
