@@ -24,6 +24,20 @@ function validateResourceId(req, res, next){
     });
 }
 
+function validateResourcePost(req, res, next) {
+    const resourcePost = req.body;
+    if (!resourcePost) {
+      res.status(400).json({ message: `Resource must have required fields` });
+    } else if (!resourcePost.resource_name) {
+      res
+        .status(400)
+        .json({ message: `Resource must have a resource_name field` });
+    }  else {
+      req.resource = resourcePost;
+      next();
+    }
+  }
+
 router.get("/", (req, res) => {
   resources
     .getResource()
@@ -45,8 +59,8 @@ router.get('/:id', validateResourceId, (req, res) => {
     }
 })
 
-router.post("/", (req, res) => {
-  const resourceBody = req.body;
+router.post("/", validateResourcePost, (req, res) => {
+  const resourceBody = req.resource;
   resources
     .addResource(resourceBody)
     .then(resource => {
